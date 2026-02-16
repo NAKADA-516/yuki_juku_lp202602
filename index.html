@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式結城塾 | AI×株式投資で経済的・時間的自由を手に入れる</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#1B2A4A;
+  --navy-deep:#0F1A30;
+  --navy-light:#263D5E;
+  --gold:#C9A96E;
+  --gold-light:#E0C990;
+  --gold-dark:#A8884A;
+  --cream:#F7F2EA;
+  --cream-dark:#EDE5D8;
+  --white:#FFFFFF;
+  --text-dark:#1a1a1a;
+  --text-body:#3a3a3a;
+  --text-muted:#6a6a6a;
+  --accent-blue:#3B7DD8;
+  --red-soft:#D45B5B;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--text-dark);line-height:1.9;overflow-x:hidden;background:var(--cream)}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes lineGrow{from{width:0}to{width:80px}}
+@keyframes gridMove{0%{transform:translate(0,0)}100%{transform:translate(30px,30px)}}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── UTILITY ── */
+.container{max-width:800px;margin:0 auto;padding:0 24px}
+.container-wide{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* ── SECTION BASE ── */
+.section-dark{background:var(--navy);color:var(--white);position:relative;overflow:hidden}
+.section-deep{background:var(--navy-deep);color:var(--white);position:relative;overflow:hidden}
+.section-light{background:var(--cream);color:var(--text-dark);position:relative}
+.section-white{background:var(--white);color:var(--text-dark);position:relative}
+
+/* grid pattern overlay */
+.grid-overlay{position:absolute;inset:0;background-image:
+  linear-gradient(rgba(59,125,216,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(59,125,216,.04) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none}
+
+/* gold line accent */
+.gold-line{width:80px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));margin:0 auto 24px;border-radius:2px;animation:lineGrow .8s ease forwards}
+.gold-line-left{margin:0 0 24px}
+
+/* ── HERO（画像のみ・最上段） ── */
+.hero{min-height:70vh;padding:0;text-align:center;position:relative;overflow:hidden;
+  background-color:var(--navy);
+  background-image:url(images/hero-bg-gold-desktop.webp);
+  background-size:cover;
+  background-position:center}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse at 20% 50%,rgba(59,125,216,.08) 0%,transparent 60%),
+  radial-gradient(ellipse at 80% 20%,rgba(201,169,110,.05) 0%,transparent 50%);
+  pointer-events:none}
+@media(max-width:768px){.hero{min-height:50vh}}
+
+/* ── HERO COPY（テキスト・画像の下のセクション） ── */
+.hero-copy{padding:80px 0 72px;text-align:center;position:relative}
+.hero-copy .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.3);color:var(--gold-light);padding:8px 20px;border-radius:100px;font-size:.8rem;letter-spacing:.05em;margin-bottom:32px;backdrop-filter:blur(4px)}
+.hero-copy .hero-badge svg{width:16px;height:16px;fill:var(--gold-light)}
+.hero-copy h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.6rem,4.5vw,2.6rem);font-weight:700;line-height:1.5;margin-bottom:24px;letter-spacing:.02em;color:var(--white)}
+.hero-copy h1 .gold{color:var(--gold-light)}
+.hero-copy .sub{font-size:clamp(.85rem,2vw,1rem);color:rgba(255,255,255,.75);line-height:1.8;max-width:600px;margin:0 auto 40px}
+.hero-copy .hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:40px}
+.hero-copy .hero-stat{text-align:center}
+.hero-copy .hero-stat .num{font-family:'Noto Serif JP',serif;font-size:2rem;font-weight:700;color:var(--gold-light);display:block}
+.hero-copy .hero-stat .label{font-size:.75rem;color:rgba(255,255,255,.6);margin-top:4px}
+@media(max-width:768px){.hero-copy{padding:60px 0 56px}.hero-copy .hero-stats{gap:24px}}
+
+/* ── CTA BUTTON ── */
+.cta-btn{display:inline-block;padding:18px 48px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy-deep);font-weight:700;font-size:1rem;border-radius:100px;letter-spacing:.05em;transition:all .3s ease;box-shadow:0 4px 24px rgba(201,169,110,.3);position:relative;overflow:hidden}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,169,110,.45)}
+.cta-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .5s ease}
+.cta-btn:hover::after{left:100%}
+.cta-btn-outline{display:inline-block;padding:16px 40px;border:2px solid var(--gold);color:var(--gold-light);font-weight:700;font-size:.95rem;border-radius:100px;letter-spacing:.05em;transition:all .3s ease}
+.cta-btn-outline:hover{background:var(--gold);color:var(--navy-deep)}
+
+/* ── SECTION HEADERS ── */
+.sec-header{text-align:center;margin-bottom:48px}
+.sec-header h2{font-family:'Noto Serif JP',serif;font-size:clamp(1.3rem,3.5vw,2rem);font-weight:700;line-height:1.5;margin-bottom:16px;letter-spacing:.02em}
+.sec-header .gold{color:var(--gold)}
+.sec-header p{font-size:.95rem;line-height:1.8;opacity:.8;max-width:600px;margin:0 auto}
+
+.sec-header-left{margin-bottom:40px}
+.sec-header-left h2{font-family:'Noto Serif JP',serif;font-size:clamp(1.3rem,3.5vw,1.8rem);font-weight:700;line-height:1.5;margin-bottom:12px}
+
+/* ── BODY TEXT ── */
+.body-text{font-size:.95rem;line-height:2;margin-bottom:20px}
+.body-text:last-child{margin-bottom:0}
+.body-bold{font-weight:700;font-size:1rem;line-height:2;margin-bottom:20px;position:relative}
+.highlight-box{background:rgba(201,169,110,.1);border-left:4px solid var(--gold);padding:20px 24px;margin:28px 0;border-radius:0 8px 8px 0}
+.highlight-box-dark{background:rgba(201,169,110,.08);border-left:4px solid var(--gold);padding:20px 24px;margin:28px 0;border-radius:0 8px 8px 0}
+
+/* indent items */
+.indent-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;font-size:.95rem;line-height:1.8}
+.indent-item::before{content:'──';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px}
+.indent-dark .indent-item::before{color:var(--gold-light)}
+
+/* ── SEPARATOR ── */
+.sep{display:flex;align-items:center;justify-content:center;gap:16px;padding:60px 0;opacity:.3}
+.sep::before,.sep::after{content:'';height:1px;width:60px;background:currentColor}
+.sep-diamond{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0}
+
+/* ── OPENING SECTION ── */
+.opening{padding:80px 0;text-align:center}
+.opening .question{font-family:'Noto Serif JP',serif;font-size:clamp(1.1rem,3vw,1.4rem);font-weight:700;line-height:1.7;margin-bottom:24px;color:var(--navy)}
+.opening p{font-size:.95rem;line-height:2;max-width:640px;margin:0 auto 16px;color:var(--text-body)}
+
+/* ── PROBLEM SECTION ── */
+.problem{padding:80px 0}
+.problem-cards{display:grid;gap:16px;margin:32px 0}
+.problem-card{display:flex;align-items:flex-start;gap:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px 24px}
+.problem-card .icon{width:24px;height:24px;flex-shrink:0;color:var(--red-soft);margin-top:4px}
+.problem-card .icon svg{width:24px;height:24px;fill:var(--red-soft)}
+.problem-card p{font-size:.9rem;line-height:1.8;color:rgba(255,255,255,.85)}
+
+/* ── STEPS ── */
+.steps{padding:80px 0}
+.step{margin-bottom:48px;position:relative;padding-left:80px}
+.step::before{content:attr(data-num);position:absolute;left:0;top:-4px;font-family:'Noto Serif JP',serif;font-size:3rem;font-weight:700;color:var(--gold);opacity:.3;line-height:1}
+.step h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.step h3 .tag{background:var(--navy);color:var(--white);font-size:.7rem;padding:4px 10px;border-radius:4px;letter-spacing:.05em}
+.step p{font-size:.9rem;line-height:2;color:var(--text-body)}
+.step .emphasis{font-weight:700;color:var(--navy);margin-top:12px;display:block}
+
+/* ── PORTFOLIO TABLE ── */
+.port-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:12px;overflow:hidden;margin:32px 0;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.port-table th{background:var(--navy);color:var(--white);padding:16px 20px;font-size:.85rem;font-weight:700;text-align:left;letter-spacing:.05em}
+.port-table td{padding:16px 20px;font-size:.88rem;line-height:1.7;border-bottom:1px solid var(--cream-dark)}
+.port-table tr:nth-child(even) td{background:var(--cream)}
+.port-table tr:last-child td{border-bottom:none}
+.port-table .tag-cell{font-weight:700;color:var(--navy);white-space:nowrap}
+
+/* same but dark version */
+.port-table-dark{width:100%;border-collapse:separate;border-spacing:0;border-radius:12px;overflow:hidden;margin:32px 0}
+.port-table-dark th{background:rgba(201,169,110,.15);color:var(--gold-light);padding:16px 20px;font-size:.85rem;font-weight:700;text-align:left;letter-spacing:.05em}
+.port-table-dark td{padding:16px 20px;font-size:.88rem;line-height:1.7;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.85)}
+.port-table-dark tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.port-table-dark tr:last-child td{border-bottom:none}
+.port-table-dark .tag-cell{font-weight:700;color:var(--gold-light);white-space:nowrap}
+
+/* ── SCORE SECTION ── */
+.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin:40px 0}
+.score-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:24px;transition:transform .3s ease,border-color .3s ease}
+.score-card:hover{transform:translateY(-4px);border-color:rgba(201,169,110,.3)}
+.score-card h4{font-size:.9rem;font-weight:700;color:var(--gold-light);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.score-card h4 .dot{width:8px;height:8px;background:var(--gold);border-radius:50%;flex-shrink:0}
+.score-card p{font-size:.82rem;line-height:1.8;color:rgba(255,255,255,.7)}
+
+/* ── TESTIMONIALS ── */
+.testimonials{padding:80px 0}
+.testimonial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.testimonial{background:var(--white);border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.04);transition:transform .3s ease}
+.testimonial:hover{transform:translateY(-4px)}
+.testimonial .quote-icon{color:var(--gold);font-family:'Noto Serif JP',serif;font-size:2.5rem;line-height:1;margin-bottom:8px;opacity:.5}
+.testimonial h4{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.testimonial .role{font-size:.78rem;color:var(--text-muted);margin-bottom:16px}
+.testimonial p{font-size:.85rem;line-height:1.9;color:var(--text-body)}
+
+/* ── BENEFITS ── */
+.benefit-cards{display:grid;gap:20px;margin:40px 0}
+.benefit-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:28px;display:flex;gap:20px;align-items:flex-start;transition:border-color .3s}
+.benefit-card:hover{border-color:rgba(201,169,110,.3)}
+.benefit-num{font-family:'Noto Serif JP',serif;font-size:1.8rem;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:40px}
+.benefit-card h4{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:8px}
+.benefit-card p{font-size:.85rem;line-height:1.8;color:rgba(255,255,255,.7)}
+
+/* ── PRICING ── */
+.pricing{padding:80px 0}
+.price-box{text-align:center;background:var(--white);border-radius:20px;padding:48px 32px;box-shadow:0 8px 40px rgba(0,0,0,.08);border:2px solid var(--gold);position:relative;overflow:hidden;max-width:560px;margin:0 auto}
+.price-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold))}
+.price-badge{display:inline-block;background:var(--navy);color:var(--gold-light);padding:8px 24px;border-radius:100px;font-size:.78rem;font-weight:700;letter-spacing:.1em;margin-bottom:24px}
+.price-main{font-family:'Noto Serif JP',serif;font-size:2.4rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.price-sub{font-size:1.1rem;color:var(--text-body);margin-bottom:8px}
+.price-note{font-size:.82rem;color:var(--text-muted);margin-bottom:32px}
+
+/* ── SKILLS LIST ── */
+.skills-list{display:grid;gap:16px;margin:32px 0}
+.skill-item{display:flex;align-items:flex-start;gap:14px;font-size:.9rem;line-height:1.8}
+.skill-check{width:24px;height:24px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:4px}
+.skill-check svg{width:14px;height:14px;fill:var(--white)}
+
+/* dark version */
+.skill-item-dark .skill-check{background:rgba(201,169,110,.2);border:1px solid var(--gold)}
+.skill-item-dark .skill-check svg{fill:var(--gold-light)}
+
+/* ── FOOTER ── */
+.footer{padding:40px 0;text-align:center;font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.8}
+.footer a{color:var(--gold-light);opacity:.6}
+
+/* ── FLOATING PARTICLES (decorative) ── */
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;opacity:.15;animation:float 6s ease-in-out infinite}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .hero-stats{gap:24px}
+  .step{padding-left:48px}
+  .step::before{font-size:2rem}
+  .score-grid{grid-template-columns:1fr}
+  .testimonial-grid{grid-template-columns:1fr}
+  .benefit-card{flex-direction:column;gap:12px}
+  .price-main{font-size:1.8rem}
+  section{padding:60px 0}
+}
+
+/* ── SECTION PADDING ── */
+.sec-pad{padding:80px 0}
+@media(max-width:768px){.sec-pad{padding:60px 0}}
+
+/* ── COPY HEADLINE STYLE ── */
+.copy-headline{font-family:'Noto Serif JP',serif;font-size:clamp(1.2rem,3.5vw,1.8rem);font-weight:700;line-height:1.6;text-align:center;margin-bottom:32px}
+.copy-headline .em{display:inline;background:linear-gradient(transparent 60%,rgba(201,169,110,.25) 60%);padding-bottom:2px}
+.copy-headline-dark .em{background:linear-gradient(transparent 60%,rgba(201,169,110,.15) 60%)}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO（画像のみ・最上段） ═══════════ -->
+<section class="hero section-dark" aria-label="ヒーロー画像">
+</section>
+
+<!-- ═══════════ HERO COPY（キャッチ・CTA・数字） ═══════════ -->
+<section class="hero-copy section-dark">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2L14.09 8.26L21 9.27L16 14.14L17.18 21.02L12 17.77L6.82 21.02L8 14.14L3 9.27L9.91 8.26L12 2Z"/></svg>
+      AI × 株式投資で自由を手に入れる
+    </div>
+    <h1>投資で欲しいのは、お金ですか？<br>それとも<span class="gold">"自由"</span>ですか？</h1>
+    <p class="sub">22年間負けなかった現役投資家が明かす「5ステップ投資法」×AI分析ツールで、<br>"なんとなくの投資"から永久に卒業する方法</p>
+    <a href="#apply" class="cta-btn">創設メンバーに申し込む</a>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">22</span><span class="label">年の投資実績</span></div>
+      <div class="hero-stat"><span class="num">3,000+</span><span class="label">名以上の投資家が在籍</span></div>
+      <div class="hero-stat"><span class="num">5</span><span class="label">分で銘柄分析完了</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ OPENING ═══════════ -->
+<section class="opening section-light">
+  <div class="container reveal">
+    <div class="gold-line"></div>
+    <p class="question">あなたに、ひとつだけ質問させてください。</p>
+    <p class="question" style="font-size:clamp(1rem,2.5vw,1.2rem)">「今持っている銘柄を、なぜ買ったのか──<br>胸を張って説明できますか？」</p>
+    <p style="margin-top:24px">もし、この問いに一瞬でも言葉が詰まったなら、どうかこの先を読み進めてください。<br>この手紙には、あなたがこれまで感じてきた「漠然とした不安」の正体と、その出口が書かれています。</p>
+  </div>
+</section>
+
+<!-- ═══════════ PROBLEM ═══════════ -->
+<section class="problem section-dark sec-pad">
+  <div class="grid-overlay"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>なぜ、あなたは<span class="gold">"いつも同じところ"</span>で<br>利確してしまうのか？</h2>
+      <p>勝てない原因は、銘柄ではなく"構造"だった</p>
+    </div>
+
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">
+      あなたはきっと、投資の「初心者」ではないはずです。NISAも活用している。個別株にも手を出した。PERやPBR、移動平均線──一通りの知識はある。YouTubeで研究し、書籍も読み込んだ。誰よりも真面目に勉強してきた自負がある。
+    </div>
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">
+      なのに、口座の数字はほとんど変わらない。いや、正直に言えば──減っているかもしれない。
+    </div>
+
+    <div class="problem-cards reveal">
+      <div class="problem-card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+        <p>半年前に買ったまま、含み損が膨らみ続ける「塩漬け株」</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+        <p>なんとなく数十銘柄に分散して、どれも微益か含み損</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+        <p>100株だけ買って「様子見」のまま放置している銘柄</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+        <p>利益が出たのに「もう少し」と欲張って、結局マイナスに転落した銘柄</p>
+      </div>
+    </div>
+
+    <div class="highlight-box-dark reveal" style="margin-top:32px">
+      <div class="body-bold" style="color:var(--white);margin-bottom:0">
+        銘柄選びが悪かったのではありません。あなたに「型」がなかった──それだけのことなのです。いい銘柄を見つけても、どこで入り、どこで出るかの「構造」がなければ、毎回同じところで利確し、毎回同じところで損切りできない。それは才能の問題ではなく、設計図の問題です。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SELF INTRO ═══════════ -->
+<section class="sec-pad section-light">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>個人投資家の9割が<br>「5年以内に退場する」という残酷な事実</h2>
+    </div>
+
+    <div class="body-text reveal">はじめまして。結城はるみと申します。22年間、日本株の世界で生き残ってきた現役投資家です。</div>
+    <div class="body-text reveal">「生き残ってきた」という言い方をしたのには、理由があります。華々しい勝利の話をしたいわけではないからです。私自身、何度も「もうダメだ」と思った夜があります。相場が暴落した日。自分の読みが完全に外れた日。大切な資金が目減りしていくのを、ただ画面の前で見つめていた日。</div>
+    <div class="body-text reveal">その経験があるからこそ、あなたの気持ちが手に取るようにわかるのです。</div>
+
+    <div class="highlight-box reveal">
+      <div class="body-bold" style="margin-bottom:0;color:var(--navy)">「再現性のある型（かた）」を持っているか、持っていないか。──勝ち続ける投資家と退場していく投資家の違いは、たったそれだけです。</div>
+    </div>
+
+    <div class="body-text reveal">YouTubeで学んだ断片的な知識。Xで流れてきた誰かの銘柄推奨。書籍に書いてあった理論。それらはすべて「パーツ」にすぎません。エンジンもハンドルもタイヤもある。でも、組み立て方がわからない。だから、走れない。</div>
+    <div class="body-bold reveal" style="color:var(--navy)">あなたに必要だったのは、もうひとつの知識ではなく、すべてをひとつに繋げる「設計図」だったのです。</div>
+  </div>
+</section>
+
+<!-- ═══════════ PAIN ═══════════ -->
+<section class="sec-pad section-deep">
+  <div class="grid-overlay"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2><span class="gold">塩漬け株</span>に、あなたの<br>未来資金を預け続けますか？</h2>
+    </div>
+
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">少しだけ、想像してみてください。今のまま自己流の投資を続けたとして──3年後、あなたの資産はどうなっているでしょうか？</div>
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">資金の大半が塩漬け株にロックされている。残りも数十銘柄に薄く分散され、どれも大した値動きがない。その間に、国策テーマ──防衛、宇宙、AI、レアアース──の大相場が来ても、「資金がない」から乗れない。</div>
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">本業で忙しい平日、介護で手が離せない休日。夜、布団の中でスマホの証券アプリを何度も開く。含み損の赤い数字。胃がキリキリする。家族との会話も上の空になる。</div>
+
+    <div class="highlight-box-dark reveal">
+      <div class="body-bold" style="color:var(--gold-light);margin-bottom:0">もし、その「武器」と「設計図」の両方が、あなたの手に渡るとしたら──あなたの投資は、根本から変わります。</div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px" class="reveal">
+      <a href="#apply" class="cta-btn">結城塾の詳細を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SOLUTION ═══════════ -->
+<section class="sec-pad section-white">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>結城塾──<br>「負ける個人投資家」から<br>「<span style="color:var(--gold-dark)">勝ち切る投資家</span>」へ</h2>
+    </div>
+
+    <div class="body-text reveal">私が22年かけて磨き上げてきたすべてを、ひとつの体系的なプログラムに凝縮しました。それが、「結城塾」です。</div>
+
+    <div style="display:grid;gap:16px;margin:32px 0" class="reveal">
+      <div style="background:var(--navy);color:var(--white);padding:20px 24px;border-radius:12px;font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:12px">
+        <span style="color:var(--gold);font-family:'Noto Serif JP',serif;font-size:1.4rem">①</span>
+        22年の実績を凝縮した「5ステップ投資法」──再現性のある戦略テンプレート
+      </div>
+      <div style="background:var(--navy);color:var(--white);padding:20px 24px;border-radius:12px;font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:12px">
+        <span style="color:var(--gold);font-family:'Noto Serif JP',serif;font-size:1.4rem">②</span>
+        機関投資家レベルのAI分析ツール「THE SCORE」──圧倒的な武器
+      </div>
+      <div style="background:var(--navy);color:var(--white);padding:20px 24px;border-radius:12px;font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:12px">
+        <span style="color:var(--gold);font-family:'Noto Serif JP',serif;font-size:1.4rem">③</span>
+        同じ志を持つ仲間とつながる上位層コミュニティ──帰属と成長の場
+      </div>
+    </div>
+
+    <div class="highlight-box reveal">
+      <div class="body-bold" style="margin-bottom:0;color:var(--navy)">「勝ち方」を教えるのではない。「勝てる人間の構造」をインストールする──それが、結城塾のミッションです。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 5 STEPS ═══════════ -->
+<section class="steps sec-pad section-light">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>5ステップ投資法</h2>
+      <p>「次に何をすべきか」が、常に明確になる</p>
+    </div>
+
+    <div class="step reveal" data-num="01">
+      <h3><span class="tag">STEP 1</span>環境認識（Market Analysis）</h3>
+      <p>今は「リスクオン」か「リスクオフ」か？　そもそも買っていい相場なのかを見極める。まず最初にやるのは、個別の銘柄を見ることではありません。「今、マーケット全体がどうなっているか」を確認します。</p>
+    </div>
+    <div class="step reveal" data-num="02">
+      <h3><span class="tag">STEP 2</span>戦略決定（Strategy）</h3>
+      <p>相場環境に合わせて最適な戦略を選ぶ。短期急騰を狙うのか、スイングか、バーゲンハントか、それとも手仕舞いか。</p>
+      <span class="emphasis">ここで「現物（守り）と信用（攻め）の使い分け」も決定。資金効率を最大化する鍵は、この戦略設計にあります。</span>
+    </div>
+    <div class="step reveal" data-num="03">
+      <h3><span class="tag">STEP 3</span>銘柄選定（Selection）</h3>
+      <p>地合いと戦略が決まって、初めて銘柄を選ぶ。順番を守るから、精度が上がる。国策テーマ、防衛、宇宙、AI、レアアース──旬のテーマから「一丁目一番地」の銘柄を、ロジカルに絞り込みます。</p>
+    </div>
+    <div class="step reveal" data-num="04">
+      <h3><span class="tag">STEP 4</span>エントリー（Entry）</h3>
+      <p>テクニカル分析、需給、市場心理を活用し、有利なポイントで仕掛ける。「私はここで入った。理由は3つ」「ここで一度利確した。理由はこうだ」「ここは見送った。理由は地合い」──リアルな判断基準を、毎月アップデートしてお伝えします。</p>
+    </div>
+    <div class="step reveal" data-num="05">
+      <h3><span class="tag">STEP 5</span>保有管理・決済（Management）</h3>
+      <p>利確と損切りの出口戦略を徹底する。プランA / B / C思考で、どんな展開にも備える。</p>
+      <span class="emphasis">「もう少し上がるかも」と欲張って利益を逃す。「いつか戻る」と損切りできない──この2つの最大の病を、事前のシナリオ設計で根治させます。</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ POSITION DESIGN ═══════════ -->
+<section class="sec-pad section-dark">
+  <div class="grid-overlay"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>あなたは<span class="gold">"攻め資金"</span>を<br>持てているか？</h2>
+      <p>ポジション設計が、勝敗を分ける</p>
+    </div>
+
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">100株だけ買って、祈るように画面を見つめる。数十銘柄に薄く分散して、どれがどれだか管理できない。──もしあなたがこの状態なら、銘柄選びの前に「資金の設計図」を作り直す必要があります。</div>
+
+    <table class="port-table-dark reveal">
+      <tr><th>資金枠</th><th>役割</th></tr>
+      <tr><td class="tag-cell">中期テーマ集中枠</td><td>国策テーマ・成長株を3〜5銘柄に絞り込み、数ヶ月単位で保有する「攻めの核」</td></tr>
+      <tr><td class="tag-cell">短期回転枠</td><td>テクニカルで短期の値幅を取り、資金回転率を上げる「スピード枠」</td></tr>
+      <tr><td class="tag-cell">押し目待機資金</td><td>暴落・調整時のバーゲンハント用。常にキャッシュで待機する「守りの砦」</td></tr>
+      <tr><td class="tag-cell">信用攻め枠</td><td>確度の高い局面で信用取引を活用し、資金効率を最大化する「ブースト枠」</td></tr>
+    </table>
+
+    <div class="highlight-box-dark reveal">
+      <div class="body-bold" style="color:var(--gold-light);margin-bottom:0">塩漬け株に未来資金を預け続ける投資から、「攻め」と「守り」を明確に分けた戦略的ポジション設計へ。この転換だけで、投資の景色は一変するはずです。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ THE SCORE ═══════════ -->
+<section class="sec-pad section-white">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2 style="color:var(--navy)">膨大なデータ、<br>確かな本質。</h2>
+      <p style="color:var(--text-body)">AIを活用して株式投資のパフォーマンスを劇的に向上させる。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec-pad section-deep" style="padding-top:0">
+  <div class="grid-overlay"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="sec-header reveal">
+      <h2>機関投資家はAIで戦っている。<br>あなたは、まだ<span class="gold">"勘"</span>で戦いますか？</h2>
+    </div>
+
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">「THE SCORE」は、独自のAI銘柄分析ツールです。毎日データが自動更新され、最新の市場情報を反映。機関投資家が組織的に行っていた銘柄分析を、あなたのパソコンの前で、たった5分で完了できます。</div>
+
+    <div class="score-grid reveal">
+      <div class="score-card">
+        <h4><span class="dot"></span>割安性スコア</h4>
+        <p>PER・PBRを用い、業種ごとの適正値を算出</p>
+      </div>
+      <div class="score-card">
+        <h4><span class="dot"></span>実質成長率スコア</h4>
+        <p>過去3期のEPS成長を重み付けして評価</p>
+      </div>
+      <div class="score-card">
+        <h4><span class="dot"></span>テクニカル売られすぎ</h4>
+        <p>RSI、サイコロジカル、25日移動平均乖離率で検知</p>
+      </div>
+      <div class="score-card">
+        <h4><span class="dot"></span>財務健全性</h4>
+        <p>自己資本比率やROEから稼ぐ力を数値化</p>
+      </div>
+      <div class="score-card">
+        <h4><span class="dot"></span>人気注目度スコア</h4>
+        <p>売買代金、出来高急増、信用残を独自スコアリング</p>
+      </div>
+    </div>
+
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85);margin-top:32px">さらに最大の特徴は、「Categorize by Yuki Harumi」。既存のツールでは検索できない「国策銘柄」や「旬のテーマ株」を、私が全上場銘柄を手作業でカテゴライズしました。</div>
+
+    <div class="highlight-box-dark reveal">
+      <div class="body-bold" style="color:var(--gold-light);margin-bottom:0">投資のために人生を犠牲にするのではなく、人生を豊かにするために投資がある。「THE SCORE」は、その理想を現実にするためのツールです。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WINNING ═══════════ -->
+<section class="sec-pad section-light">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>30％で利確する投資家と、<br>50％を取り切る投資家。</h2>
+      <p>その違いは"握力"ではなく<strong>"設計図"</strong>。</p>
+    </div>
+
+    <div class="body-text reveal">多くの投資家は「負けない方法」は知っています。しかし、本当に人生を変えるのは「勝ち切る力」です。その差は「胆力」でも「根性」でもありません。事前に「どこまで持つか」の設計図を描いているかどうか──ただそれだけの違いです。</div>
+
+    <div style="display:grid;gap:20px;margin:32px 0" class="reveal">
+      <div style="background:var(--white);border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.06)">
+        <h4 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:8px">🔹 上昇波動の「握力」理論</h4>
+        <p style="font-size:.88rem;line-height:1.9;color:var(--text-body)">トレンドが継続している限り、利益を伸ばし続ける判断基準を明確にします。</p>
+      </div>
+      <div style="background:var(--white);border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.06)">
+        <h4 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:8px">🔹 利確分割戦略</h4>
+        <p style="font-size:.88rem;line-height:1.9;color:var(--text-body)">段階的に利益を確定しながら残りを伸ばす。分割決済がトータルリターンを劇的に変えます。</p>
+      </div>
+      <div style="background:var(--white);border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.06)">
+        <h4 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:8px">🔹 暴落時の資金移動戦略</h4>
+        <p style="font-size:.88rem;line-height:1.9;color:var(--text-body)">暴落は恐怖ではなく、チャンス。「休むも相場」を「準備の時間」に変える方法を教えます。</p>
+      </div>
+    </div>
+
+    <div class="highlight-box reveal">
+      <div class="body-bold" style="margin-bottom:0;color:var(--navy)">「勝ち方」を知るだけでは足りない。「勝てる人間の構造」をインストールする──それが、結城塾の核心です。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ MENTAL ═══════════ -->
+<section class="sec-pad section-dark">
+  <div class="grid-overlay"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>AIが導く、<span class="gold">投資の最適解</span></h2>
+    </div>
+
+    <div style="display:grid;gap:12px;margin:32px 0;max-width:480px;margin-left:auto;margin-right:auto" class="reveal">
+      <div style="display:flex;align-items:center;gap:12px;font-size:1rem;color:rgba(255,255,255,.9)">
+        <span style="color:var(--gold);font-size:1.2rem">⚡</span>「買った瞬間に下がる」
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:1rem;color:rgba(255,255,255,.9)">
+        <span style="color:var(--gold);font-size:1.2rem">⚡</span>「成果が出ない」
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:1rem;color:rgba(255,255,255,.9)">
+        <span style="color:var(--gold);font-size:1.2rem">⚡</span>「損切りできない」
+      </div>
+    </div>
+
+    <div class="copy-headline copy-headline-dark reveal" style="color:rgba(255,255,255,.9);margin-top:32px">
+      ただ、<span class="em">「正しい地図」</span>を持っていなかっただけなのです。
+    </div>
+
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">出口戦略が明確になれば、株価が下がっても「想定内だ」と冷静でいられる。プランA/B/C思考で事前にシナリオを描いておけば、どんな展開になっても、あなたは「次の一手」を持っている。</div>
+    <div class="body-bold reveal" style="color:var(--gold-light)">枕に頭をつけた瞬間、安心して眠りに落ちる。翌朝、穏やかな気持ちで「THE SCORE」を確認する。そんな日常が、あなたを待っています。</div>
+
+    <div style="text-align:center;margin-top:40px" class="reveal">
+      <a href="#apply" class="cta-btn">無料相談を予約する</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ REAL TRADE ═══════════ -->
+<section class="sec-pad section-light">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>「教科書の話」は一切しません<br>──リアルトレード完全解剖</h2>
+    </div>
+
+    <div class="body-text reveal">結城塾と他の投資スクールとの決定的な違い。それは、「私自身のリアルなトレード」をすべてさらけ出すことです。</div>
+
+    <div class="indent-dark" style="margin:28px 0">
+      <div class="indent-item reveal">Entry：なぜこの価格で入ったのか。地合いをどう判断したか</div>
+      <div class="indent-item reveal">ロット：資金の何％を投入したか。なぜその比率にしたか</div>
+      <div class="indent-item reveal">心理状態：途中で迷った瞬間。不安を感じたポイント</div>
+      <div class="indent-item reveal">Exit：なぜここで利確（または損切り）したか</div>
+      <div class="indent-item reveal">反省点：次にどう改善するか</div>
+    </div>
+
+    <div class="highlight-box reveal">
+      <div class="body-bold" style="margin-bottom:0;color:var(--navy)">銘柄そのものよりも、「何を見て、何を捨て、どこを重視して、なぜ入らなかったか」──この「選択基準」の言語化が、結城塾の真の価値です。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ COMMUNITY ═══════════ -->
+<section class="sec-pad section-deep">
+  <div class="grid-overlay"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>あなたは、もう<br><span class="gold">一人で悩まなくていい</span></h2>
+    </div>
+
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">投資で最も危険なこと──それは、「孤独な判断」です。一人で情報を集め、一人で分析し、一人で決断する。その孤独が、判断を鈍らせ、感情を暴走させるのです。</div>
+
+    <div style="display:grid;gap:20px;margin:40px 0" class="reveal">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:28px">
+        <h4 style="font-size:.95rem;font-weight:700;color:var(--gold-light);margin-bottom:12px">📡 毎月の定例Zoom戦略会議</h4>
+        <p style="font-size:.88rem;line-height:1.9;color:rgba(255,255,255,.75)">結城はるみが直接、最新の相場観や注目銘柄、自身のトレード判断を解説。あなたの具体的な疑問を、その場でぶつけてください。</p>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:28px">
+        <h4 style="font-size:.95rem;font-weight:700;color:var(--gold-light);margin-bottom:12px">🤝 塾生専用オンラインフォーラム</h4>
+        <p style="font-size:.88rem;line-height:1.9;color:rgba(255,255,255,.75)">同じ志を持つ仲間と語り合える場所。リアル懇親会、淡路島合宿、シンガポール合宿──「豊かな体験の共有」が、この塾の大きな魅力です。</p>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:28px">
+        <h4 style="font-size:.95rem;font-weight:700;color:var(--gold-light);margin-bottom:12px">📊 充実の配信コンテンツ</h4>
+        <p style="font-size:.88rem;line-height:1.9;color:rgba(255,255,255,.75)">ハイスコア銘柄レポート、フォーキャストTHE WORLD、Weekly Strategy──すべて塾生の学習リズムに最適化して配信。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SKILLS ═══════════ -->
+<section class="sec-pad section-white">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>結城塾で「できるようになること」</h2>
+    </div>
+
+    <div class="skills-list reveal">
+      <div class="skill-item">
+        <div class="skill-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+        <span><strong>環境認識力</strong>──「今、買っていい相場なのか？」に根拠を持って答えられる</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+        <span><strong>銘柄選定力</strong>──THE SCOREでファンダメンタルズとテクニカルの両面から評価</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+        <span><strong>エントリー＆決済力</strong>──感情に左右されず利確・損切りを実行できる</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+        <span><strong>ポジション設計力</strong>──攻め資金と守り資金を分けた戦略的な資金配分</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+        <span><strong>勝ち切る力</strong>──上昇トレンドの利益を最大化する握力と分割利確の技術</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+        <span><strong>投資メンタル</strong>──含み損に怯えず、暴落をチャンスに変える思考構造</span>
+      </div>
+    </div>
+
+    <div class="highlight-box reveal" style="margin-top:40px">
+      <div class="body-bold" style="margin-bottom:0;color:var(--navy)">「たまたま」ではなく、シナリオ通りに勝つ。自分の力で相場を読み、迷いなく売買できる投資家になる。それが、結城塾のゴールです。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="testimonials sec-pad section-light">
+  <div class="container-wide">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>受講された方の声</h2>
+    </div>
+
+    <div class="testimonial-grid">
+      <div class="testimonial reveal">
+        <div class="quote-icon">"</div>
+        <h4>損切りが怖くなくなったのが、一番大きい変化</h4>
+        <div class="role">40代・会社員</div>
+        <p>自己流で3年やって、なんとなく買ってはなんとなく売る、の繰り返しでした。5ステップを学んでからは「なぜ買うのか」「どうなったら売るのか」が明確になりました。</p>
+      </div>
+      <div class="testimonial reveal">
+        <div class="quote-icon">"</div>
+        <h4>家族との時間が増えました</h4>
+        <div class="role">50代・管理職</div>
+        <p>以前は毎晩チャートを何時間も眺めて、妻に「また株？」と言われる日常でした。今は平日5分、週末に少し時間を取るだけ。生活の質が変わりました。</p>
+      </div>
+      <div class="testimonial reveal">
+        <div class="quote-icon">"</div>
+        <h4>ようやく"自分の投資"ができるように</h4>
+        <div class="role">60代・定年退職</div>
+        <p>退職金の運用で失敗したくない一心で入塾。SNSに振り回されていた頃とは比べものにならないほど、落ち着いて判断できるようになりました。</p>
+      </div>
+      <div class="testimonial reveal">
+        <div class="quote-icon">"</div>
+        <h4>塩漬け株を整理して、資金効率が劇的に改善</h4>
+        <div class="role">50代・経営者</div>
+        <p>数十銘柄に分散していた資金を大胆に整理。旬のテーマ株に集中投資する戦略に切り替えてから、回転率が劇的に上がりました。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PRICING ═══════════ -->
+<section class="pricing sec-pad section-dark" id="apply">
+  <div class="grid-overlay"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>募集要項</h2>
+      <p>創設メンバー限定・先着200名</p>
+    </div>
+
+    <div class="price-box reveal">
+      <div class="price-badge">FOUNDING MEMBER</div>
+      <div class="price-main">入会金 98,000<span style="font-size:1rem">円（税込）</span></div>
+      <div class="price-sub">月額 20,000円（税込）・<strong>初月無料</strong></div>
+      <div class="price-note">分割払い対応 ｜ 14日間 全額返金保証</div>
+      <a href="#" class="cta-btn" style="width:100%;display:block;text-align:center">創設メンバーに申し込む</a>
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefit-cards reveal" style="margin-top:48px">
+      <div class="benefit-card">
+        <div class="benefit-num">1</div>
+        <div>
+          <h4>入会金 特別割引</h4>
+          <p>通常価格より大幅にお得な創設メンバー限定価格</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">2</div>
+        <div>
+          <h4>初月サブスクリプション無料</h4>
+          <p>最初の1ヶ月は完全無料でお試しいただけます</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">3</div>
+        <div>
+          <h4>結城はるみとの個別Zoom相談（30分）</h4>
+          <p>保有銘柄の整理、ポートフォリオの再設計をパーソナライズ</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">4</div>
+        <div>
+          <h4>14日間の全額返金保証</h4>
+          <p>「自分には合わない」と感じた場合、入会金を全額返金</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-bold reveal" style="color:var(--gold-light);text-align:center;margin-top:40px">完全にリスクゼロで、結城塾を体験できます。</div>
+  </div>
+</section>
+
+<!-- ═══════════ URGENCY ═══════════ -->
+<section class="sec-pad section-light" style="text-align:center">
+  <div class="container">
+    <div class="reveal">
+      <div class="gold-line"></div>
+      <p class="copy-headline" style="color:var(--navy)">「<span class="em">始めなかった後悔</span>」と「<span class="em">始めてみる勇気</span>」。<br>5年後のあなたを変えるのは、今日のこの決断です。</p>
+      <div class="body-text" style="max-width:600px;margin:0 auto 32px">考えている間にも相場は動き、自己流の投資による「見えない損失」は積み上がり続けています。</div>
+      <a href="#apply" class="cta-btn">今すぐ創設メンバーに申し込む</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ LAST MESSAGE ═══════════ -->
+<section class="sec-pad section-deep">
+  <div class="grid-overlay"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="sec-header reveal">
+      <div class="gold-line"></div>
+      <h2>最後に──<br>私の思想と、あなたへの願い</h2>
+    </div>
+
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">私がなぜ株式投資を選んだのか。それは、「自由な生活」がずっとしたかったからです。お金そのものが欲しいというよりも、経験とか、やりたいことを自分で選ぶ自由とか。「選択の自由」が欲しかったんです。</div>
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">若い頃、「人に依存する生き方はリスキーだ」と痛感しました。愛する人との関係や家庭という「聖域」を守るためには、自分で稼ぐ力をつけなきゃいけない。それが投資の世界に飛び込んだ原点です。</div>
+    <div class="body-text reveal" style="color:rgba(255,255,255,.85)">私がこうして教えているのは、ある種「遺言」のようなつもりです。日本人がもっと賢い投資家になって、国の発展と共に豊かになる。22年かけて培ってきた知識と失敗の経験を、すべて皆さんにシェアしたい。それが私なりの社会貢献であり、株への恩返しだと思っています。</div>
+    <div class="body-bold reveal" style="color:var(--gold-light)">一緒に、より賢く、より自由な人生を目指していきましょう。</div>
+
+    <div style="text-align:right;margin-top:40px;color:rgba(255,255,255,.7);font-size:.9rem" class="reveal">結城塾 主宰　結城はるみ</div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer section-navy" style="background:var(--navy-deep)">
+  <div class="container">
+    <p style="margin-bottom:8px">結城塾 運営事務局</p>
+    <p>電話：080-9106-8651 / 050-6877-5820</p>
+    <p style="margin-top:16px;font-size:.72rem;opacity:.5;max-width:600px;margin-left:auto;margin-right:auto">※投資にはリスクが伴います。当塾は投資助言業ではなく、投資教育を目的としたコミュニティです。最終的な投資判断はご自身の責任で行ってください。過去の実績は将来の成果を保証するものではありません。</p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
