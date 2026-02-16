@@ -1,10 +1,11 @@
 {
   "name": "yuki-juku-lp",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "serve -l 3000"
+    "start": "serve -s . -l $PORT"
   },
-  "devDependencies": {
+  "dependencies": {
     "serve": "^14.2.4"
   }
 }
