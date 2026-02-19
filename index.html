@@ -83,6 +83,7 @@ a{text-decoration:none;color:inherit}
 .gold-line-left{margin:0 0 24px}
 
 /* ── HERO（画像のみ・最上段） ── */
+.hero-mobile-img{display:none}
 .hero{min-height:70vh;padding:0;text-align:center;position:relative;overflow:hidden;
   background-color:var(--navy);
   background-image:url(images/hero-bg-gold-desktop.webp);
@@ -92,7 +93,8 @@ a{text-decoration:none;color:inherit}
   radial-gradient(ellipse at 20% 50%,rgba(59,125,216,.08) 0%,transparent 60%),
   radial-gradient(ellipse at 80% 20%,rgba(201,169,110,.05) 0%,transparent 50%);
   pointer-events:none}
-@media(max-width:768px){.hero{min-height:auto;height:auto;aspect-ratio:3/4;background-image:url(images/hero-bg-gold-mobile.webp);background-size:contain;background-repeat:no-repeat;background-position:center top;max-height:80vh}}
+@media(max-width:768px){.hero{min-height:auto;height:auto;background-image:none;padding:0}
+.hero-mobile-img{display:block;width:100%;height:auto}}
 
 /* ── HERO COPY（テキスト・画像の下のセクション） ── */
 .hero-copy{padding:60px 0 72px;text-align:center;position:relative}
@@ -287,6 +289,7 @@ a{text-decoration:none;color:inherit}
 
 <!-- ═══════════ HERO（画像のみ・最上段） ═══════════ -->
 <section class="hero section-dark" aria-label="ヒーロー画像">
+  <img class="hero-mobile-img" src="images/hero-bg-gold-mobile.webp" alt="AI×株式投資で経済的・時間的自由を手に入れる" loading="eager">
 </section>
 
 <!-- ═══════════ HERO COPY（キャッチ・CTA・数字） ═══════════ -->
