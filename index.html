@@ -161,7 +161,9 @@ a{text-decoration:none;color:inherit}
 .step{margin-bottom:48px;position:relative;padding-left:80px}
 .step::before{content:attr(data-num);position:absolute;left:0;top:-4px;font-family:'Noto Serif JP',serif;font-size:3rem;font-weight:700;color:var(--gold);opacity:.3;line-height:1}
 .step h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.step h3 .tag{background:var(--navy);color:var(--white);font-size:.7rem;padding:4px 10px;border-radius:4px;letter-spacing:.05em}
+.step h3 .tag{background:var(--navy);color:var(--white);font-size:.7rem;padding:4px 10px;border-radius:4px;letter-spacing:.05em;white-space:nowrap}
+.sp-br{display:none}
+@media(max-width:768px){.sp-br{display:inline}}
 .step p{font-size:1rem;line-height:2;color:var(--text-body)}
 .step .emphasis{font-weight:700;color:var(--navy);margin-top:12px;display:block}
 
@@ -295,7 +297,7 @@ a{text-decoration:none;color:inherit}
 <!-- ═══════════ HERO COPY（キャッチ・CTA・数字） ═══════════ -->
 <section class="hero-copy section-dark">
   <div class="container" style="position:relative;z-index:1">
-    <h1>投資で欲しいのは、お金ですか？<br>それとも<span class="gold">"自由"</span>ですか？</h1>
+    <h1>投資で欲しいのは、<br class="sp-br">お金ですか？<br>それとも<span class="gold">"自由"</span>ですか？</h1>
     <p class="sub">22年間、相場で生き抜いてきた現役投資家が明かす<br>「5ステップ投資法」×AI分析ツールで、<br>"なんとなくの投資"から永久に卒業する方法</p>
     <a href="#apply" class="cta-btn">創設メンバーに申し込む</a>
     <div class="hero-stats">
@@ -310,7 +312,7 @@ a{text-decoration:none;color:inherit}
 <section class="opening section-light">
   <div class="container reveal">
     <div class="gold-line"></div>
-    <p class="question">あなたに、ひとつだけ質問させてください。</p>
+    <p class="question">あなたに、ひとつだけ<br class="sp-br">質問させてください。</p>
     <p class="question" style="font-size:clamp(1rem,2.5vw,1.2rem)">「今持っている銘柄を、なぜ買ったのか──<br>胸を張って説明できますか？」</p>
     <p style="margin-top:24px">もし、この問いに一瞬でも言葉が詰まったなら、どうかこの先を読み進めてください。<br>この手紙には、あなたがこれまで感じてきた「漠然とした不安」の正体と、その出口が書かれています。</p>
   </div>
@@ -322,7 +324,7 @@ a{text-decoration:none;color:inherit}
   <div class="container" style="position:relative;z-index:1">
     <div class="sec-header reveal">
       <div class="gold-line"></div>
-      <h2>なぜ、あなたは<span class="gold">"いつも同じところ"</span>で<br>利確してしまうのか？</h2>
+      <h2>なぜ、あなたは<br class="sp-br"><span class="gold">"いつも同じところ"</span>で<br>利確してしまうのか？</h2>
       <p>勝てない原因は、銘柄ではなく"構造"だった</p>
     </div>
 
@@ -365,7 +367,7 @@ a{text-decoration:none;color:inherit}
   <div class="container">
     <div class="sec-header reveal">
       <div class="gold-line"></div>
-      <h2>個人投資家の9割が<br>「5年以内に退場する」という残酷な事実</h2>
+      <h2>個人投資家の9割が<br>「5年以内に退場する」という<br class="sp-br">残酷な事実</h2>
     </div>
 
     <div class="body-text reveal">はじめまして。結城はるみと申します。22年間、日本株の世界で生き残ってきた現役投資家です。</div>
@@ -387,7 +389,7 @@ a{text-decoration:none;color:inherit}
   <div class="container" style="position:relative;z-index:1">
     <div class="sec-header reveal">
       <div class="gold-line"></div>
-      <h2>その<span class="gold">「塩漬け株」</span>は本来利益を生むはずだった…<br>これからも大切な資金を機会損失させていいのでしょうか？</h2>
+      <h2>その<span class="gold">「塩漬け株」</span>は<br class="sp-br">本来利益を生むはずだった…<br>これからも大切な資金を機会損失させていいのでしょうか？</h2>
     </div>
 
     <div class="body-text reveal" style="color:rgba(255,255,255,.85)">少しだけ、想像してみてください。今のまま自己流の投資を続けたとして──3年後、あなたの資産はどうなっているでしょうか？</div>
@@ -501,7 +503,7 @@ a{text-decoration:none;color:inherit}
     <div class="sec-header reveal">
       <div class="gold-line"></div>
       <h2 style="color:var(--navy)">膨大なデータ、<br>確かな本質。</h2>
-      <p style="color:var(--text-body)">AIを活用して株式投資のパフォーマンスを劇的に向上させる。</p>
+      <p style="color:var(--text-body)">AIを活用して株式投資のパフォーマンスを<br class="sp-br">劇的に向上させる。</p>
     </div>
   </div>
 </section>
