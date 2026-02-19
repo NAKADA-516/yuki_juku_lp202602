@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "serve -l 3000",
+    "start": "serve -l $PORT",
     "dev": "serve -l 3000"
   },
   "dependencies": {
