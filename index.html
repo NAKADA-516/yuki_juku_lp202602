@@ -196,6 +196,13 @@ a{text-decoration:none;color:inherit}
 /* ── TESTIMONIALS ── */
 .testimonials{padding:80px 0}
 .testimonial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.testimonial-img{width:100%;height:auto;border-radius:8px;margin-top:16px;display:block;cursor:zoom-in;transition:opacity .2s}
+.testimonial-img:hover{opacity:.85}
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out}
+#lightbox.active{display:flex}
+#lightbox img{max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+#lightbox-close{position:absolute;top:20px;right:28px;color:#fff;font-size:2.5rem;cursor:pointer;line-height:1;opacity:.8}
+#lightbox-close:hover{opacity:1}
 .testimonial{background:var(--white);border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.04);transition:transform .3s ease}
 .testimonial:hover{transform:translateY(-4px)}
 .testimonial-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
@@ -735,31 +742,29 @@ a{text-decoration:none;color:inherit}
     <div class="testimonial-grid">
       <div class="testimonial reveal">
         <div class="testimonial-header">
-          <img src="images/testimonial_1.webp" alt="40代・会社員" class="testimonial-photo">
           <div class="testimonial-meta">
-            <div class="quote-icon">"</div>
-            <h4>損切りが怖くなくなったのが、一番大きい変化</h4>
-            <div class="role">40代・会社員</div>
+            <h4>入塾からわずか数日で+14万5,000円の含み益。正直、驚きました。</h4>
+            <div class="role">T.S.さん（40代・会社員）</div>
           </div>
         </div>
-        <p>自己流で3年やって、なんとなく買ってはなんとなく売る、の繰り返しでした。5ステップを学んでからは「なぜ買うのか」「どうなったら売るのか」が明確になりました。</p>
+        <p>入る前は半信半疑でした。これまで色んな投資スクールに手を出しましたが、どれも結果が出なかったんです。でも、結城塾はまるで違いました。</p>
+        <p>入塾後すぐにTWOSTONE（7352）を買付単価658円・5,000株でエントリー。わずか数日で687円まで上昇し、含み益+145,000円（損益率+4.41%）。緑色のプラスがずらりと並んだ証券口座を見たとき、正直、手が震えました。</p>
+        <p>結城塾で一番変わったのは、<strong>自分の判断に自信が持てるようになったこと</strong>。根拠が明確だから、含み益が出ても焦らず冷静にホールドできます。</p>
+        <img src="images/testimonial_ss1.png?v=2" alt="受講生の声" class="testimonial-img">
       </div>
       <div class="testimonial reveal">
         <div class="testimonial-header">
-          <img src="images/testimonial_2.webp" alt="50代・経営者" class="testimonial-photo">
           <div class="testimonial-meta">
-            <div class="quote-icon">"</div>
             <h4>家族との時間が増えました</h4>
             <div class="role">50代・経営者</div>
           </div>
         </div>
         <p>以前は毎晩チャートを何時間も眺めて、妻に「また株？」と言われる日常でした。今は平日5分、週末に少し時間を取るだけ。生活の質が変わりました。</p>
+        <img src="images/testimonial_ss2.png" alt="受講生の声" class="testimonial-img" style="display:none">
       </div>
       <div class="testimonial reveal">
         <div class="testimonial-header">
-          <img src="images/testimonial_3.webp" alt="60代・定年退職" class="testimonial-photo">
           <div class="testimonial-meta">
-            <div class="quote-icon">"</div>
             <h4>ようやく"自分の投資"ができるように</h4>
             <div class="role">60代・定年退職</div>
           </div>
@@ -768,9 +773,7 @@ a{text-decoration:none;color:inherit}
       </div>
       <div class="testimonial reveal">
         <div class="testimonial-header">
-          <img src="images/testimonial_4.webp" alt="50代・管理職" class="testimonial-photo">
           <div class="testimonial-meta">
-            <div class="quote-icon">"</div>
             <h4>塩漬け株を整理して、資金効率が劇的に改善</h4>
             <div class="role">50代・管理職</div>
           </div>
@@ -915,6 +918,35 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+</script>
+
+<div id="lightbox">
+  <span id="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="拡大表示">
+</div>
+
+<script>
+// Lightbox
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxClose = document.getElementById('lightbox-close');
+document.querySelectorAll('.testimonial-img').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+lightbox.addEventListener('click', () => {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+});
+lightboxClose.addEventListener('click', (e) => {
+  e.stopPropagation();
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+});
 </script>
 </body>
 </html>
