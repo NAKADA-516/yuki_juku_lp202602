@@ -109,6 +109,14 @@ a{text-decoration:none;color:inherit}
 .hero-copy .hero-stat .label{font-size:.75rem;color:rgba(255,255,255,.6);margin-top:4px}
 @media(max-width:768px){.hero-copy{padding:40px 0 56px}.hero-copy .hero-stats{gap:24px}}
 
+/* ── HERO GALLERY ── */
+.hero-gallery{background:var(--navy-deep);padding:0}
+.hero-gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.hero-gallery-grid img{width:100%;height:220px;object-fit:cover;object-position:center;display:block;transition:transform .4s ease,opacity .3s ease}
+.hero-gallery-grid img:hover{transform:scale(1.03);opacity:.9}
+@media(max-width:900px){.hero-gallery-grid{grid-template-columns:repeat(2,1fr);gap:4px}.hero-gallery-grid img{height:180px}}
+@media(max-width:480px){.hero-gallery-grid img{height:130px}}
+
 /* ── CTA BUTTON ── */
 .cta-btn{display:inline-block;padding:18px 48px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy-deep);font-weight:700;font-size:1rem;border-radius:100px;letter-spacing:.05em;transition:all .3s ease;box-shadow:0 4px 24px rgba(201,169,110,.3);position:relative;overflow:hidden}
 .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,169,110,.45)}
@@ -210,7 +218,7 @@ a{text-decoration:none;color:inherit}
 .testimonial{background:var(--white);border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.04);transition:transform .3s ease}
 .testimonial:hover{transform:translateY(-4px)}
 .testimonial-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
-.testimonial-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.testimonial-photo{width:88px;height:88px;border-radius:50%;object-fit:contain;object-position:center center;flex-shrink:0;border:3px solid #f0f0f0;box-shadow:0 2px 8px rgba(0,0,0,.12);background:#f0f0f0}
 .testimonial-meta{flex:1;min-width:0}
 .testimonial .quote-icon{color:var(--gold);font-family:'Noto Serif JP',serif;font-size:2.5rem;line-height:1;margin-bottom:8px;opacity:.5}
 .testimonial h4{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:4px}
@@ -318,6 +326,20 @@ a{text-decoration:none;color:inherit}
       <div class="hero-stat"><span class="num">900</span><span class="label">名以上の投資家が在籍</span></div>
       <div class="hero-stat"><span class="num">5</span><span class="label">分で銘柄分析完了</span></div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════ HERO GALLERY ═══════════ -->
+<section class="hero-gallery">
+  <div class="hero-gallery-grid">
+    <img src="images/gallery/webp/IMG_3800.jpg" alt="結城塾の様子" loading="lazy">
+    <img src="images/gallery/webp/IMG_4430.jpg" alt="結城塾の様子" loading="lazy">
+    <img src="images/gallery/webp/L1020269.jpg" alt="結城塾の様子" loading="lazy">
+    <img src="images/gallery/webp/L1020281.jpg" alt="結城塾の様子" loading="lazy">
+    <img src="images/gallery/webp/L1020326.jpg" alt="結城塾の様子" loading="lazy">
+    <img src="images/gallery/webp/L1020585.jpg" alt="結城塾の様子" loading="lazy">
+    <img src="images/gallery/webp/L1020622.jpg" alt="結城塾の様子" loading="lazy">
+    <img src="images/gallery/webp/L1020791.jpg" alt="結城塾の様子" loading="lazy">
   </div>
 </section>
 
@@ -775,7 +797,7 @@ a{text-decoration:none;color:inherit}
     <div class="testimonial-grid">
       <div class="testimonial reveal">
         <div class="testimonial-header">
-          <img src="images/profile_1.webp" alt="T.S.さん" class="testimonial-photo">
+          <img src="images/profile_1.webp" alt="T.S.さん" class="testimonial-photo" style="object-fit:contain;background:#f0f0f0">
           <div class="testimonial-meta">
             <h4>入塾からわずか数日で+14万5,000円の含み益。正直、驚きました。</h4>
             <div class="role">T.S.さん（50代・会社員）</div>
@@ -788,7 +810,7 @@ a{text-decoration:none;color:inherit}
       </div>
       <div class="testimonial reveal">
         <div class="testimonial-header">
-          <img src="images/profile_2.webp" alt="50代・経営者" class="testimonial-photo">
+          <img src="images/profile_2.webp" alt="50代・経営者" class="testimonial-photo" style="object-fit:contain;background:#f0f0f0">
           <div class="testimonial-meta">
             <h4>家族との時間が増えました</h4>
             <div class="role">50代・女性経営者</div>
@@ -799,15 +821,18 @@ a{text-decoration:none;color:inherit}
       </div>
       <div class="testimonial reveal">
         <div class="testimonial-header">
+          <img src="images/profile_4.webp" alt="50代・会社員" class="testimonial-photo" style="object-fit:contain;background:#f0f0f0">
           <div class="testimonial-meta">
-            <h4>ようやく"自分の投資"ができるように</h4>
-            <div class="role">60代・定年退職</div>
+            <h4>仕事が忙しくても、週末だけで成果が出るようになった</h4>
+            <div class="role">50代・会社員</div>
           </div>
         </div>
-        <p>退職金の運用で失敗したくない一心で入塾。SNSに振り回されていた頃とは比べものにならないほど、落ち着いて判断できるようになりました。</p>
+        <p>平日は残業続きで、株の勉強に時間を割く余裕なんてありませんでした。でも結城塾の手法は違いました。銘柄選びの基準が明確で、短時間で判断できる。</p>
+        <p>週末に1〜2時間見るだけで翌週のエントリー候補が絞れるんです。<strong>仕事を言い訳にして何年も踏み出せなかった自分が、少し恥ずかしくなりました。</strong></p>
       </div>
       <div class="testimonial reveal">
         <div class="testimonial-header">
+          <img src="images/profile_3.webp" alt="50代・管理職" class="testimonial-photo" style="object-fit:contain;background:#f0f0f0">
           <div class="testimonial-meta">
             <h4>塩漬け株を整理して、資金効率が劇的に改善</h4>
             <div class="role">50代・管理職</div>
